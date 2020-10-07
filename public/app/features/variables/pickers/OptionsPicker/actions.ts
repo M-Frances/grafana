@@ -89,10 +89,7 @@ export const commitChangesToVariable = (): ThunkResult<void> => {
 
     const adapter = variableAdapters.get(updated.type);
     await adapter.setValue(updated, updated.current, true);
-    console.log('!!!! option selected');
-    var a = dispatch(hideOptions());
-    console.log(getState());
-    return a;
+    return dispatch(hideOptions());
   };
 };
 

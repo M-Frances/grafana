@@ -793,10 +793,7 @@ function upgradePanelLink(link: any): DataLink {
   }
 
   if (link.includeVars) {
-    console.log('!!!Dashboard includeVars');
-    console.log(url);
     url = urlUtil.appendQueryToUrl(url, `$${DataLinkBuiltInVars.includeVars}`);
-    console.log(url);
   }
 
   if (link.params) {

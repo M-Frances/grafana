@@ -63,8 +63,6 @@ async function fetchDashboard(
   getState: () => StoreState
 ): Promise<DashboardDTO | null> {
   try {
-    console.log('!!!old page');
-    console.log(window.location.href);
     switch (args.routeInfo) {
       case DashboardRouteInfo.Home: {
         // load home dash
@@ -91,11 +89,8 @@ async function fetchDashboard(
         }
 
         const loaderSrv: DashboardLoaderSrv = args.$injector.get('dashboardLoaderSrv');
-        console.log('!!!before init');
-        console.log(args);
         const dashDTO: DashboardDTO = await loaderSrv.loadDashboard(args.urlType, args.urlSlug, args.urlUid);
-        console.log('!!initDashboard');
-        console.log(dashDTO);
+
         if (args.fixUrl && dashDTO.meta.url) {
           // check if the current url is correct (might be old slug)
           const dashboardUrl = locationUtil.stripBaseFromUrl(dashDTO.meta.url);
@@ -148,8 +143,7 @@ export function initDashboard(args: InitDashboardArgs): ThunkResult<void> {
         dispatch(dashboardInitSlow());
       }
     }, 500);
-    console.log('initDashboard');
-    console.log(getState());
+
     // fetch dashboard data
     const dashDTO = await fetchDashboard(args, dispatch, getState);
 

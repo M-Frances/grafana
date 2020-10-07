@@ -269,8 +269,6 @@ export class LinkSrv implements LinkService {
     }
 
     if (link.includeVars) {
-      console.log('!!fill param');
-      console.log(params);
       this.templateSrv.fillVariableValuesForUrl(params);
     }
 

@@ -24,18 +24,14 @@ export class DashboardLinksDashboard extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Readonly<Props>) {
-    console.log('!!! did update?');
-    console.log(prevProps);
-    console.log(this.props);
-    if (this.props !== prevProps) {
+    if (this.props.link !== prevProps.link) {
       this.searchForDashboards();
     }
   }
 
   searchForDashboards = async () => {
     const { dashboardId, link } = this.props;
-    console.log('!should be the first one');
-    console.log(link);
+
     const searchHits = await searchForTags(link);
     const resolvedLinks = resolveLinks(dashboardId, link, searchHits);
 
@@ -56,14 +52,11 @@ export class DashboardLinksDashboard extends PureComponent<Props, State> {
   renderList = () => {
     const { link } = this.props;
     const { resolvedLinks } = this.state;
-    console.log('!!render links');
-    console.log(link);
-    console.log('!!resolved link');
+
     return (
       <>
         {resolvedLinks.length > 0 &&
           resolvedLinks.map((resolvedLink, index) => {
-            console.log(resolvedLink);
             const linkElement = (
               <a className="gf-form-label" href={resolvedLink.url} target={link.targetBlank ? '_blank' : '_self'}>
                 <Icon name="apps" style={{ marginRight: '4px' }} />

@@ -25,8 +25,6 @@ export const locationReducer = (state: LocationState = initialState, action: Act
   if (updateLocation.match(action)) {
     const payload: LocationUpdate = action.payload;
     const { path, routeParams, replace } = payload;
-    console.log('!!!core path');
-    console.log(path);
     let query = payload.query || state.query;
 
     if (payload.partial) {
