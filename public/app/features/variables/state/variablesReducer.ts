@@ -32,7 +32,11 @@ export const variablesReducer = (
     // Now that we know we are dealing with a payload that is addressed for an adapted variable let's reduce state:
     // Firstly call the sharedTemplatingReducer that handles all shared actions between variable types
     // Secondly call the specific variable type's reducer
-    return variableAdapters.get(action.payload.type).reducer(sharedReducer(state, action), action);
+    var t1 = sharedReducer(state, action);
+    var t2 = variableAdapters.get(action.payload.type).reducer(t1, action);
+    // console.log('!!!reducer');
+    // console.log(t2);
+    return t2;
   }
 
   return state;
